@@ -1,4 +1,5 @@
-import fs from 'fs'
+import fs from "fs";
+import { network } from "hardhat";
 
 /**
  * #### Description
@@ -7,8 +8,8 @@ import fs from 'fs'
 export class Database {
     /**
      * Paths database
-     * @param network 
-     * @returns 
+     * @param network
+     * @returns
      */
     _path(network: string) {
         return `./db/${network}.json`;
@@ -17,11 +18,11 @@ export class Database {
     /**
      * Get saved smart contract address
      * @param network network name
-     * @param smcName name of smart contract want to get address 
-     * @returns 
+     * @param smcName name of smart contract want to get address
+     * @returns
      */
     read(network: string, smcName: string): string | null {
-        const filePath = this._path(network)
+        const filePath = this._path(network);
         if (fs.existsSync(filePath)) {
             return JSON.parse(fs.readFileSync(filePath, "utf-8"))[smcName];
         }
@@ -30,13 +31,13 @@ export class Database {
 
     /**
      * Save smart contract into file
-     * @param network network name
+     * @param nw network name
      * @param smcName name of smart contract wan to save
      * @param address address of deployed smart contract
      */
-    write(network: string, smcName: string, address: string) {
+    write(smcName: string, address: string, nw: string = network.name) {
         let file: { [key: string]: string } = {};
-        const filePath = this._path(network);
+        const filePath = this._path(nw);
         if (fs.existsSync(filePath)) {
             file = JSON.parse(fs.readFileSync(filePath, "utf-8"));
         }
