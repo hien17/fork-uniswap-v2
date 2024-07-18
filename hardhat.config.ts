@@ -17,7 +17,19 @@ const config: HardhatUserConfig = {
             accounts: [privateKey!],
             chainId: 12227331,
             url: "https://neoxseed1.ngd.network",
+            gasPrice: 300000000000,
         },
+        arbSepolia: {
+            accounts: [privateKey!],
+            chainId: 421614,
+            url: "https://sepolia-rollup.arbitrum.io/rpc",
+        },
+        neoxTestnetV4: {
+            accounts: [privateKey!],
+            chainId: 12227332,
+            url: "https://neoxt4seed1.ngd.network",
+            gasPrice: 100e9,
+        }
     },
 };
 
